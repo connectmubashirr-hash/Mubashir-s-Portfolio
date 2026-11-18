@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mubashir Ahmad — Shopify, WordPress & AI Automation Developer</title>
+<meta name="description" content="Mubashir Ahmad builds Shopify stores, WordPress websites, custom web features, Klaviyo email flows and AI automations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F0F0E; --ink-2:#161614; --ink-3:#1D1D1A; --line:#2B2A26;
+  --bone:#ECE8DF; --bone-2:#CFCAC0; --mute:#8C877D;
+  --accent:#E4572E; --accent-soft:rgba(228,87,46,.14);
+  --sage:#8FA58A;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Manrope',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{width:min(1200px,100% - 48px);margin:0 auto}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.serif{font-family:var(--serif);font-weight:400}
+em.serif{font-style:italic;color:var(--accent)}
+::selection{background:var(--accent);color:var(--ink)}
+
+/* grain */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* loader */
+#loader{position:fixed;inset:0;background:var(--ink);z-index:200;display:flex;align-items:flex-end;justify-content:space-between;padding:40px;transition:transform 1s var(--ease) .1s}
+#loader.done{transform:translateY(-100%)}
+#loader .count{font-family:var(--serif);font-size:clamp(80px,16vw,200px);line-height:.8}
+#loader .lname{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+
+/* progress */
+#progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);width:0;z-index:60}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(15,15,14,.82);backdrop-filter:blur(14px);border-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
+.logo span.mark{width:34px;height:34px;border:1px solid var(--bone);border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:18px;font-style:italic}
+.navlinks{display:flex;gap:32px;font-size:14px;color:var(--bone-2)}
+.navlinks a{position:relative}
+.navlinks a::after{content:"";position:absolute;left:0;bottom:-4px;height:1px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
+.navlinks a:hover::after{transform:scaleX(1);transform-origin:left}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:100px;font-weight:600;font-size:14px;transition:background .3s,color .3s,transform .3s var(--ease);will-change:transform}
+.btn-solid{background:var(--bone);color:var(--ink)}
+.btn-solid:hover{background:var(--accent);color:var(--ink)}
+.btn-line{border:1px solid var(--line);color:var(--bone)}
+.btn-line:hover{border-color:var(--bone)}
+.btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translate(3px,-3px)}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--bone);border-radius:100px;padding:10px 16px;font:600 13px var(--sans)}
+
+/* hero */
+.hero{min-height:100vh;padding:130px 0 60px;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+.status{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border:1px solid var(--line);border-radius:100px;font-size:13px;color:var(--bone-2);margin-bottom:28px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--sage);box-shadow:0 0 0 0 rgba(143,165,138,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(143,165,138,0)}100%{box-shadow:0 0 0 0 rgba(143,165,138,0)}}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(48px,7.4vw,104px);line-height:.95;letter-spacing:-.02em}
+h1 .line{display:block;overflow:hidden;padding-bottom:.06em}
+h1 .line>span{display:inline-block;transform:translateY(105%);transition:transform 1.1s var(--ease)}
+.loaded h1 .line>span{transform:none}
+h1 .line:nth-child(2)>span{transition-delay:.08s}
+h1 .line:nth-child(3)>span{transition-delay:.16s}
+.rotator{display:inline-grid;vertical-align:top;color:var(--accent);font-style:italic}
+.rotator b{grid-area:1/1;font-weight:400;opacity:0;transform:translateY(40%);transition:opacity .5s,transform .6s var(--ease);white-space:nowrap}
+.rotator b.on{opacity:1;transform:none}
+.rotator b.out{opacity:0;transform:translateY(-40%);transition:opacity .25s,transform .5s var(--ease)}
+.hero p.lead{max-width:520px;color:var(--bone-2);font-size:18px;margin:28px 0 36px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.stats{display:flex;gap:44px;margin-top:56px;padding-top:28px;border-top:1px solid var(--line)}
+.stat b{display:block;font-family:var(--serif);font-weight:400;font-size:46px;line-height:1}
+.stat>span{font-size:13px;color:var(--mute)}
+
+.portrait{position:relative;aspect-ratio:1;width:100%;max-width:470px;justify-self:end}
+.portrait .ring-text{position:absolute;inset:0;animation:spin 28s linear infinite}
+.portrait .ring-text text{font-family:var(--mono);font-size:11.2px;letter-spacing:.32em;fill:var(--bone-2)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.portrait .photo{position:absolute;inset:11%;border-radius:50%;overflow:hidden;background:#1a1a1a;transition:transform .6s var(--ease)}
+.portrait .photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15) contrast(1.05)}
+.portrait .orbit{position:absolute;inset:6%;border:1px dashed var(--line);border-radius:50%}
+.chip{position:absolute;background:var(--ink-2);border:1px solid var(--line);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;box-shadow:0 20px 40px rgba(0,0,0,.4);animation:float 6s ease-in-out infinite}
+.chip .ic{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.chip .ic svg{width:16px;height:16px}
+.chip small{display:block;font-weight:500;color:var(--mute);font-size:11px}
+.chip.c1{top:8%;left:-8%}
+.chip.c2{bottom:14%;left:-12%;animation-delay:-2s}
+.chip.c3{top:44%;right:-8%;animation-delay:-4s}
+@keyframes float{50%{transform:translateY(-12px)}}
+.scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-cue i{width:1px;height:46px;background:linear-gradient(var(--bone) 50%,transparent 50%);background-size:1px 200%;animation:cue 2s linear infinite}
+@keyframes cue{from{background-position:0 100%}to{background-position:0 -100%}}
+
+/* marquee */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0;overflow:hidden;white-space:nowrap}
+.marquee .track{display:inline-flex;gap:56px;animation:mq 40s linear infinite;padding-right:56px}
+.marquee span{font-family:var(--serif);font-size:38px;display:inline-flex;align-items:center;gap:56px;color:var(--bone-2)}
+.marquee span::after{content:"✳";font-size:20px;color:var(--accent)}
+@keyframes mq{to{transform:translateX(-100%)}}
+
+/* sections */
+section{padding:130px 0;position:relative}
+.sec-head{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:end;margin-bottom:64px}
+.sec-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.4vw,72px);line-height:1;letter-spacing:-.015em}
+.sec-head p{color:var(--bone-2);max-width:480px;justify-self:end}
+.idx{display:flex;gap:12px;align-items:center;margin-bottom:18px}
+.idx::before{content:"";width:28px;height:1px;background:var(--accent)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+
+/* services bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.card{background:var(--ink-2);border:1px solid var(--line);border-radius:22px;padding:30px;position:relative;overflow:hidden;transition:border-color .4s,opacity 1s var(--ease),transform .6s var(--ease)}
+.card:hover{border-color:#45433d}
+.card .num{position:absolute;top:44px;right:46px;z-index:4;color:var(--bone);background:rgba(15,15,14,.6);padding:3px 8px;border-radius:6px}
+.card h3{font-size:24px;font-weight:600;letter-spacing:-.01em;margin:22px 0 10px}
+.card p{color:var(--mute);font-size:15px;max-width:440px}
+.card ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.card li{font-size:12px;padding:6px 11px;border:1px solid var(--line);border-radius:100px;color:var(--bone-2)}
+.s1{grid-column:span 4}.s2{grid-column:span 2}.s3{grid-column:span 3}.s4{grid-column:span 3}.s5{grid-column:span 6}
+.vis{height:220px;border-radius:14px;background:var(--ink-3);border:1px solid var(--line);position:relative;overflow:hidden}
+
+/* shopify vis: browser */
+.browser .bar{height:30px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 12px}
+.browser .bar i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.browser .bar .url{margin-left:12px;font-family:var(--mono);font-size:10px;color:var(--mute);background:var(--ink);padding:3px 10px;border-radius:6px}
+.browser .cart{margin-left:auto;position:relative;color:var(--bone-2)}
+.browser .cart svg{width:15px;height:15px}
+.browser .cart b{position:absolute;top:-6px;right:-8px;background:var(--accent);color:var(--ink);font-size:9px;width:14px;height:14px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono)}
+.shop{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px}
+.prod{border-radius:8px;overflow:hidden;background:var(--ink-2);border:1px solid var(--line);animation:prodIn 6s var(--ease) infinite}
+.prod .img{height:92px;background:#26251f;position:relative}
+.prod:nth-child(2) .img{background:#2c2620}.prod:nth-child(3) .img{background:#232823}.prod:nth-child(4) .img{background:#2a2422}
+.prod .img::after{content:"";position:absolute;left:30%;top:22%;width:40%;height:56%;border-radius:40% 40% 10px 10px;background:rgba(236,232,223,.08)}
+.prod .t{height:6px;width:70%;background:var(--line);border-radius:4px;margin:10px 8px 6px}
+.prod .p{height:6px;width:35%;background:var(--accent);opacity:.7;border-radius:4px;margin:0 8px 10px}
+.prod:nth-child(2){animation-delay:.15s}.prod:nth-child(3){animation-delay:.3s}.prod:nth-child(4){animation-delay:.45s}
+@keyframes prodIn{0%{opacity:0;transform:translateY(14px)}10%,85%{opacity:1;transform:none}100%{opacity:0}}
+.toast{position:absolute;right:14px;bottom:14px;background:var(--bone);color:var(--ink);font-size:11px;font-weight:700;padding:8px 12px;border-radius:8px;animation:toast 6s var(--ease) infinite}
+@keyframes toast{0%,40%{opacity:0;transform:translateY(10px)}48%,80%{opacity:1;transform:none}90%,100%{opacity:0}}
+
+/* email flow vis */
+.flow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;height:100%;padding:12px}
+.node{font-size:11px;font-weight:600;padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--ink-2);display:flex;gap:8px;align-items:center;white-space:nowrap}
+.node i{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.node.wait i{background:var(--mute)}.node.split i{background:var(--sage)}
+.wire{width:1px;height:16px;background:var(--line);position:relative;overflow:hidden}
+.wire::after{content:"";position:absolute;left:0;top:-100%;width:1px;height:100%;background:var(--accent);animation:wire 2.4s linear infinite}
+@keyframes wire{to{top:100%}}
+.splitrow{display:flex;gap:10px}
+
+/* code vis */
+.code{font-family:var(--mono);font-size:12.5px;line-height:1.75;padding:18px 20px;color:var(--bone-2);white-space:pre;height:100%}
+.code .k{color:var(--accent)}.code .s{color:var(--sage)}.code .c{color:var(--mute)}
+.caret{display:inline-block;width:7px;height:14px;background:var(--bone);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* wp vis */
+.wp{padding:16px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:56px 70px 40px;gap:10px;height:100%}
+.blk{border-radius:8px;background:var(--ink-2);border:1px dashed #3a3934;animation:blk 5s var(--ease) infinite;display:flex;align-items:center;padding:0 12px;font-family:var(--mono);font-size:10px;color:var(--mute)}
+.blk.hd{grid-column:span 2}.blk.ft{grid-column:span 2}
+.blk:nth-child(2){animation-delay:.25s}.blk:nth-child(3){animation-delay:.5s}.blk:nth-child(4){animation-delay:.75s}
+@keyframes blk{0%{opacity:0;transform:scale(.94)}12%,82%{opacity:1;transform:none;border-style:solid;border-color:var(--line)}100%{opacity:0}}
+
+/* ai vis */
+.ai svg{width:100%;height:100%}
+.ai .n rect{fill:var(--ink-2);stroke:var(--line)}
+.ai .n text{fill:var(--bone);font:600 11px var(--sans)}
+.ai .n text.sub{fill:var(--mute);font:500 9px var(--mono);letter-spacing:.06em}
+.ai path.w{stroke:var(--line);fill:none;stroke-width:1.2}
+.ai path.w2{stroke:var(--accent);fill:none;stroke-width:1.5;stroke-dasharray:6 300;animation:dash 3s linear infinite}
+@keyframes dash{from{stroke-dashoffset:306}to{stroke-dashoffset:0}}
+
+/* image strip */
+.strip{padding:70px 0 0;overflow:hidden}
+.strip .row{display:flex;gap:18px;width:max-content;animation:strip 60s linear infinite}
+.strip:hover .row{animation-play-state:paused}
+.strip figure{width:380px;flex-shrink:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--ink-2)}
+.strip figure img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;filter:grayscale(.35);transition:filter .5s,transform .8s var(--ease)}
+.strip figure:hover img{filter:none;transform:scale(1.04)}
+.strip figcaption{display:flex;justify-content:space-between;padding:12px 16px;font-size:13px;color:var(--bone-2)}
+@keyframes strip{to{transform:translateX(-50%)}}
+
+/* work */
+.work-feature{display:grid;grid-template-columns:1.6fr 1fr;gap:56px;align-items:center;margin-bottom:110px}
+.work-feature.rev{grid-template-columns:1fr 1.6fr}
+.work-feature.rev .shots{order:2}
+.shots{position:relative;padding-bottom:40px}
+.frame{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--ink-2);box-shadow:0 40px 80px rgba(0,0,0,.45)}
+.frame .bar{height:30px;display:flex;align-items:center;gap:6px;padding:0 12px;border-bottom:1px solid var(--line)}
+.frame .bar i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.frame .bar span{margin-left:10px;font-family:var(--mono);font-size:10px;color:var(--mute);background:var(--ink);padding:3px 10px;border-radius:6px}
+.frame .viewport{overflow:hidden;aspect-ratio:1100/695}
+.frame img{width:100%;transition:transform 1.2s var(--ease)}
+.shots:hover .frame img{transform:scale(1.035)}
+.phone{position:absolute;right:-24px;bottom:0;width:26%;min-width:120px;border-radius:26px;padding:7px;background:#0a0a09;border:1px solid #3a3934;box-shadow:0 30px 60px rgba(0,0,0,.6);transition:transform .8s var(--ease)}
+.work-feature.rev .phone{right:auto;left:-24px}
+.phone img{border-radius:20px;aspect-ratio:360/669;object-fit:cover;object-position:top}
+.phone::before{content:"";position:absolute;top:13px;left:50%;transform:translateX(-50%);width:34%;height:9px;border-radius:9px;background:#0a0a09;z-index:1}
+.shots:hover .phone{transform:translateY(-10px) rotate(-2deg)}
+.work-info .tags{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px}
+.work-info .tags span{font-size:12px;padding:6px 11px;border:1px solid var(--line);border-radius:100px;color:var(--bone-2)}
+.work-info h3{font-family:var(--serif);font-weight:400;font-size:clamp(34px,3.6vw,52px);line-height:1;letter-spacing:-.01em}
+.work-info p{color:var(--bone-2);margin-bottom:12px}
+.work-info ul{list-style:none;color:var(--bone-2);font-size:15px;margin:16px 0 26px}
+.work-info li{padding:9px 0 9px 26px;border-top:1px solid var(--line);position:relative}
+.work-info li::before{content:"→";position:absolute;left:0;color:var(--accent)}
+.visit{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;border-bottom:1px solid var(--accent);padding-bottom:3px}
+.visit svg{width:14px;height:14px;transition:transform .3s var(--ease)}
+.visit:hover svg{transform:translate(3px,-3px)}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.wcard .frame{margin-bottom:22px}
+.wcard h4{font-size:21px;font-weight:600;margin-bottom:6px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.wcard h4 small{font-family:var(--mono);font-size:11px;color:var(--mute);font-weight:400;letter-spacing:.06em}
+.wcard p{color:var(--mute);font-size:14.5px;margin-bottom:14px}
+.wcard:hover .frame img{transform:scale(1.04)}
+
+
+/* photo visuals */
+.vis.photo{height:240px;background:#000}
+.vis.photo.tall{height:300px}
+.vis .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;transform:scale(1.04);animation:kb 16s ease-in-out infinite alternate;transition:opacity .6s}
+.card:hover .vis .bg{opacity:.7}
+@keyframes kb{to{transform:scale(1.14) translate(-1.5%,-1%)}}
+.vis .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,15,14,.05) 0%,rgba(15,15,14,.75) 100%)}
+.glass{background:rgba(22,22,20,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(236,232,223,.12);border-radius:12px;box-shadow:0 20px 40px rgba(0,0,0,.45)}
+.vis .glass .bar{height:26px;display:flex;align-items:center;gap:5px;padding:0 10px;border-bottom:1px solid rgba(236,232,223,.1)}
+.vis .glass .bar i{width:7px;height:7px;border-radius:50%;background:rgba(236,232,223,.2)}
+.vis .glass .bar .url{margin-left:8px;font-family:var(--mono);font-size:9.5px;color:var(--bone-2)}
+.mini-browser{position:absolute;right:6%;top:12%;width:58%;overflow:hidden;z-index:2;transition:transform .8s var(--ease)}
+.card:hover .mini-browser{transform:translateY(-6px)}
+.slides{position:relative;aspect-ratio:1100/695}
+.slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity .9s}
+.slides img.on{opacity:1}
+.pop{position:absolute;z-index:3;display:flex;gap:10px;align-items:center;padding:10px 14px;font-size:12px}
+.pop b{display:block;font-size:12.5px}
+.pop small{color:var(--mute);font-size:11px}
+.pop .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.pop .dot.ok{background:var(--sage)}
+.pop.p1{left:5%;top:16%;animation:popin 7s var(--ease) infinite}
+.pop.p2{left:9%;bottom:12%;animation:popin 7s var(--ease) infinite 3.5s}
+@keyframes popin{0%,6%{opacity:0;transform:translateY(12px) scale(.96)}12%,42%{opacity:1;transform:none}50%,100%{opacity:0;transform:translateY(-8px)}}
+.mails{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 16px;z-index:2}
+.mail{display:flex;gap:10px;align-items:center;padding:10px 12px;animation:mailin 9s var(--ease) infinite}
+.mail b{display:block;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mail small{color:var(--mute);font-size:11px}
+.mail .av{width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--ink);display:grid;place-items:center;font-weight:700;font-size:12px;flex-shrink:0}
+.mail.m2{animation-delay:.5s}.mail.m2 .av{background:var(--bone)}
+.mail.m3{animation-delay:1s}.mail.m3 .av{background:var(--sage)}
+.mail>div{min-width:0}
+@keyframes mailin{0%{opacity:0;transform:translateX(-24px)}8%,80%{opacity:1;transform:none}90%,100%{opacity:0;transform:translateX(16px)}}
+.panel{position:absolute;inset:14% 12% 12%;z-index:2}
+.panel .wp{height:calc(100% - 26px);grid-template-rows:1fr 1.4fr 1fr;padding:12px;gap:8px}
+.panel .blk{background:rgba(236,232,223,.07);color:var(--bone-2);font-size:10px}
+.panel .bar .publish{margin-left:auto;background:var(--accent);color:var(--ink);font:700 9.5px var(--sans);padding:3px 9px;border-radius:5px;animation:pub 5s infinite}
+@keyframes pub{0%,70%{opacity:.5}80%,100%{opacity:1}}
+.term{position:absolute;left:8%;right:8%;top:12%;bottom:10%;z-index:2;overflow:hidden}
+.term .code{font-size:11.5px;padding:12px 16px;line-height:1.7}
+.vis.ai svg{position:absolute;inset:0;z-index:2}
+.vis.ai .n rect{fill:rgba(22,22,20,.78)}
+
+.latest{position:absolute;top:-14px;right:20px;z-index:3;background:var(--accent);color:var(--ink);font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:100px;box-shadow:0 8px 20px rgba(228,87,46,.35)}
+/* about */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.big-quote{font-family:var(--serif);font-size:clamp(30px,3.6vw,48px);line-height:1.15;letter-spacing:-.01em}
+.big-quote .w{opacity:.18;transition:opacity .4s}
+.big-quote .w.lit{opacity:1}
+.about-copy p{color:var(--bone-2);margin-bottom:18px}
+.values{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:36px}
+.values div{background:var(--ink);padding:22px}
+.values b{display:block;font-size:15px;margin-bottom:4px}
+.values span{font-size:13.5px;color:var(--mute)}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative}
+.steps .rail{position:absolute;top:22px;left:0;right:0;height:1px;background:var(--line)}
+.steps .rail i{display:block;height:100%;width:0;background:var(--accent);transition:width 2s var(--ease)}
+.steps.in .rail i{width:100%}
+.step .dot{width:44px;height:44px;border-radius:50%;background:var(--ink);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:12px;position:relative;z-index:1;margin-bottom:26px;transition:border-color .4s,background .4s,color .4s}
+.steps.in .step .dot{border-color:var(--accent);background:var(--accent);color:var(--ink)}
+.steps.in .step:nth-child(3) .dot{transition-delay:.5s}.steps.in .step:nth-child(4) .dot{transition-delay:1s}.steps.in .step:nth-child(5) .dot{transition-delay:1.5s}
+.step h4{font-size:19px;font-weight:600;margin-bottom:8px}
+.step p{color:var(--mute);font-size:14.5px}
+
+/* experience */
+.xp{border-top:1px solid var(--line)}
+.xp-row{display:grid;grid-template-columns:220px 1fr 1.3fr;gap:40px;padding:40px 0;border-bottom:1px solid var(--line)}
+.xp-row h4{font-size:22px;font-weight:600}
+.xp-row .co{color:var(--accent);font-size:14px;font-weight:600}
+.xp-row ul{list-style:none;color:var(--bone-2);font-size:15px}
+.xp-row li{padding-left:22px;position:relative;margin-bottom:10px}
+.xp-row li::before{content:"";position:absolute;left:0;top:11px;width:10px;height:1px;background:var(--accent)}
+.edu{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.edu div{border:1px solid var(--line);border-radius:18px;padding:24px}
+.edu b{display:block;font-weight:600;margin:10px 0 4px}
+.edu span{color:var(--mute);font-size:14px}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.skill{border:1px solid var(--line);border-radius:22px;padding:28px;background:var(--ink-2)}
+.skill h5{font-size:17px;font-weight:600;margin:14px 0 14px;display:flex;justify-content:space-between}
+.skill .tags{display:flex;flex-wrap:wrap;gap:8px}
+.skill .tags span{font-size:13px;padding:7px 12px;border-radius:100px;background:var(--ink-3);color:var(--bone-2);transition:background .3s,color .3s}
+.skill .tags span:hover{background:var(--accent);color:var(--ink)}
+
+/* cta / contact */
+.cta{text-align:center;padding:160px 0 120px;border-top:1px solid var(--line)}
+.cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(56px,10vw,150px);line-height:.9;letter-spacing:-.025em}
+.cta h2 em{color:var(--accent)}
+.cta p{color:var(--bone-2);margin:26px auto 40px;max-width:520px;font-size:18px}
+.contact-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:80px;text-align:left}
+.ccard{position:relative;background:var(--ink-2);border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:22px;min-height:190px;transition:border-color .4s,transform .5s var(--ease)}
+.ccard:hover{border-color:#4a4842;transform:translateY(-4px)}
+.ccard .top{display:flex;justify-content:space-between;align-items:center}
+.ccard .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.ccard .ic svg{width:20px;height:20px}
+.ccard .label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.ccard .val{display:block;font-weight:600;font-size:17px;color:var(--bone);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ccard .acts{display:flex;gap:8px;margin-top:auto}
+.ccard .acts a,.ccard .acts button{flex:1;text-align:center;background:none;border:1px solid var(--line);color:var(--bone);border-radius:100px;padding:9px 12px;font:600 12.5px var(--sans);cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.ccard .acts a:hover,.ccard .acts button:hover{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.ccard .acts .pri{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.ccard .live{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--bone-2);margin-top:auto}
+.ccard .live i{width:8px;height:8px;border-radius:50%;background:var(--sage);animation:pulse 2s infinite}
+.copy{background:none;border:1px solid var(--line);color:var(--bone);border-radius:100px;padding:8px 14px;font:600 12px var(--sans);cursor:pointer;transition:background .3s,color .3s;flex-shrink:0}
+.copy:hover{background:var(--bone);color:var(--ink)}
+footer{border-top:1px solid var(--line);padding:30px 0}
+footer .wrap{display:flex;justify-content:space-between;color:var(--mute);font-size:13px}
+
+/* responsive */
+@media (max-width:980px){
+  .navlinks,.nav-cta{display:none}.menu-btn{display:block}
+  .navlinks.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;gap:0;background:var(--ink);border-bottom:1px solid var(--line)}
+  .navlinks.open a{padding:16px 24px;border-top:1px solid var(--line)}
+  .hero-grid,.about-grid,.sec-head{grid-template-columns:1fr}
+  .sec-head p{justify-self:start}
+  .portrait{justify-self:center;max-width:380px;margin-top:20px}
+  .chip.c1{left:-2%}.chip.c2{left:-4%}.chip.c3{right:-2%}
+  .s1,.s2,.s3,.s4,.s5{grid-column:span 6}
+  .steps{grid-template-columns:1fr 1fr;row-gap:40px}.steps .rail{display:none}
+  .xp-row{grid-template-columns:1fr;gap:16px}
+  .skills,.edu,.contact-row{grid-template-columns:1fr}
+  .work-feature,.work-feature.rev{grid-template-columns:1fr;gap:34px;margin-bottom:80px}
+  .work-feature.rev .shots{order:0}
+  .phone,.work-feature.rev .phone{right:-6px;left:auto;width:30%}
+  .work-grid{grid-template-columns:1fr;gap:48px}
+  .strip figure{width:280px}
+  .mini-browser{width:70%;right:4%}
+  .pop.p1{left:3%}
+  .term .code{font-size:10px}
+  .stats{gap:28px;flex-wrap:wrap}
+  section{padding:96px 0}
+  .scroll-cue{display:none}
+  .ai{overflow-x:auto}.ai svg{min-width:680px}
+}
+@media (max-width:560px){
+  .shop{grid-template-columns:repeat(2,1fr)}.prod:nth-child(n+3){display:none}
+  .steps{grid-template-columns:1fr}
+  .values{grid-template-columns:1fr}
+  footer .wrap{flex-direction:column;gap:6px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  h1 .line>span{transform:none}
+}
+</style>
+</head>
+<body>
+
+<div id="loader"><div class="count" id="count">0</div><div class="lname">Mubashir Ahmad — Portfolio</div></div>
+<div id="progress"></div>
+
+<nav id="nav">
+  <div class="wrap">
+    <a href="#top" class="logo"><span class="mark">M</span>Mubashir Ahmad</a>
+    <div class="navlinks" id="navlinks">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#process">Process</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="btn btn-solid nav-cta mag">Let's talk
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">Menu</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="status"><i></i>Available for new projects · Lahore, Pakistan</div>
+      <h1>
+        <span class="line"><span>I build</span></span>
+        <span class="line"><span><span class="rotator" id="rotator"><b class="on">Shopify stores</b><b>WordPress sites</b><b>custom code</b><b>AI automations</b><b>email flows</b></span></span></span>
+        <span class="line"><span>that sell.</span></span>
+      </h1>
+      <p class="lead">Developer for e‑commerce brands and businesses. I work across Shopify, WordPress, custom web development, Klaviyo email marketing and AI automation, and I deliver on time for launch.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-solid mag">Start a project
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+        <a href="#services" class="btn btn-line mag">See what I do</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b><span class="cnt" data-to="3">0</span>+</b><span>Years of experience</span></div>
+        <div class="stat"><b><span class="cnt" data-to="200">0</span>+</b><span>Projects delivered</span></div>
+        <div class="stat"><b><span class="cnt" data-to="5">0</span></b><span>Core services</span></div>
+      </div>
+    </div>
+
+    <div class="portrait" id="portrait">
+      <svg class="ring-text" viewBox="0 0 400 400" aria-hidden="true">
+        <defs><path id="circ" d="M200,200 m-188,0 a188,188 0 1,1 376,0 a188,188 0 1,1 -376,0"/></defs>
+        <text><textPath href="#circ">SHOPIFY · WORDPRESS · CUSTOM DEVELOPMENT · AI AUTOMATION · KLAVIYO ·&#160;</textPath></text>
+      </svg>
+      <div class="orbit"></div>
+      <div class="photo" id="photo"><img src="__PHOTO__" alt="Portrait of Mubashir Ahmad"></div>
+      <div class="chip c1"><span class="ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h10l-1 8H4L3 5zM6 5V4a2 2 0 014 0v1"/></svg></span><div>Shopify<small>Themes & setup</small></div></div>
+      <div class="chip c2"><span class="ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="4" cy="8" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="12" cy="12" r="2"/><path d="M6 7l4-2M6 9l4 2"/></svg></span><div>AI Automation<small>Workflows</small></div></div>
+      <div class="chip c3"><span class="ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12v8H2zM2 4l6 5 6-5"/></svg></span><div>Klaviyo<small>Email flows</small></div></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="mono">Scroll</span><i></i></div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track" id="track">
+    <span>Shopify</span><span>WordPress</span><span>Klaviyo</span><span>HTML &amp; CSS</span><span>Front‑end</span><span>AI Automation</span><span>Email Design</span><span>Meta Ads</span><span>TikTok Ads</span>
+  </div>
+</div>
+
+
+<div class="strip" aria-label="Recent client stores">
+  <div class="row"><figure><img src="__IMG_tac__" alt="The Abaya Company store" loading="lazy"><figcaption><span>The Abaya Company</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_dnb__" alt="DNB Automotive store" loading="lazy"><figcaption><span>DNB Automotive</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_blush__" alt="The Blush Ambition store" loading="lazy"><figcaption><span>The Blush Ambition</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_lml__" alt="Little Miss Label store" loading="lazy"><figcaption><span>Little Miss Label</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_mimi__" alt="Mimis Daughters store" loading="lazy"><figcaption><span>Mimis Daughters</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_dcf__" alt="Dance Card Full store" loading="lazy"><figcaption><span>Dance Card Full</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_tac__" aria-hidden="true" alt="The Abaya Company store" loading="lazy"><figcaption><span>The Abaya Company</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_dnb__" aria-hidden="true" alt="DNB Automotive store" loading="lazy"><figcaption><span>DNB Automotive</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_blush__" aria-hidden="true" alt="The Blush Ambition store" loading="lazy"><figcaption><span>The Blush Ambition</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_lml__" aria-hidden="true" alt="Little Miss Label store" loading="lazy"><figcaption><span>Little Miss Label</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_mimi__" aria-hidden="true" alt="Mimis Daughters store" loading="lazy"><figcaption><span>Mimis Daughters</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_dcf__" aria-hidden="true" alt="Dance Card Full store" loading="lazy"><figcaption><span>Dance Card Full</span><span class="mono">Shopify</span></figcaption></figure></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="idx mono">01 — Services</div><h2 class="rv">What I can <em class="serif">build</em> for you</h2></div>
+      <p class="rv d1">From the storefront to the inbox to the work behind the scenes. One developer for the whole stack, so nothing gets lost between freelancers.</p>
+    </div>
+
+    <div class="bento">
+      <article class="card s1 rv">
+        <div class="vis photo tall">
+          <img class="bg" src="__IMG_p_shop__" alt="" aria-hidden="true">
+          <div class="shade"></div>
+          <div class="mini-browser glass">
+            <div class="bar"><i></i><i></i><i></i><span class="url" id="shopUrl">dsnutsandboltsautomotive.com</span></div>
+            <div class="slides" id="shopSlides">
+              <img class="on" src="__IMG_dnb__" alt="" data-url="dsnutsandboltsautomotive.com">
+              <img src="__IMG_blush__" alt="" data-url="shoptheblushambition.co.uk">
+              <img src="__IMG_lml__" alt="" data-url="littlemisslabel.com">
+              <img src="__IMG_mimi__" alt="" data-url="mimisdaughters.com">
+            </div>
+          </div>
+          <div class="pop p1 glass"><span class="dot ok"></span><div><b>New order #1042</b><small>2 items · just now</small></div></div>
+          <div class="pop p2 glass"><span class="dot"></span><div><b>Added to cart</b><small>Free shipping unlocked</small></div></div>
+        </div>
+        <span class="num mono">01</span>
+        <h3>Shopify Development</h3>
+        <p>Theme customisation, product and collection pages, homepage sections, discounts, shipping and checkout setup, app integration. Every store is tested on desktop and mobile before launch.</p>
+        <ul><li>Theme customisation</li><li>Store setup</li><li>App integration</li><li>Launch checklist</li></ul>
+      </article>
+
+      <article class="card s2 rv d1">
+        <div class="vis photo tall">
+          <img class="bg" src="__IMG_p_mail__" alt="" aria-hidden="true" style="object-position:70% 50%">
+          <div class="shade"></div>
+          <div class="mails">
+            <div class="mail glass m1"><span class="av">W</span><div><b>Welcome to the club 🎉</b><small>Here's 10% off your first order</small></div></div>
+            <div class="mail glass m2"><span class="av">C</span><div><b>You left something behind</b><small>Your cart is waiting…</small></div></div>
+            <div class="mail glass m3"><span class="av">T</span><div><b>Thanks for your order!</b><small>Here's what to expect next</small></div></div>
+          </div>
+        </div>
+        <span class="num mono">02</span>
+        <h3>Klaviyo Email</h3>
+        <p>Welcome, abandoned cart, post‑purchase and win‑back flows, plus custom responsive HTML templates.</p>
+      </article>
+
+      <article class="card s3 rv">
+        <div class="vis photo">
+          <img class="bg" src="__IMG_p_wp__" alt="" aria-hidden="true">
+          <div class="shade"></div>
+          <div class="glass panel">
+            <div class="bar"><i></i><i></i><i></i><span class="url">Editing: Home page</span><span class="publish">Publish</span></div>
+            <div class="wp"><div class="blk hd">Header &amp; menu</div><div class="blk">Hero banner</div><div class="blk">Services</div><div class="blk ft">Contact form</div></div>
+          </div>
+        </div>
+        <span class="num mono">03</span>
+        <h3>WordPress Websites</h3>
+        <p>Business websites and landing pages that are fast, responsive and easy for you to update yourself.</p>
+        <ul><li>Business sites</li><li>Landing pages</li><li>Responsive</li></ul>
+      </article>
+
+      <article class="card s4 rv d1">
+        <div class="vis photo">
+          <img class="bg" src="__IMG_p_code__" alt="" aria-hidden="true">
+          <div class="shade"></div>
+          <div class="term glass"><div class="bar"><i></i><i></i><i></i><span class="url">free-shipping-bar.liquid</span></div><div class="code" id="code"></div></div>
+        </div>
+        <span class="num mono">04</span>
+        <h3>Custom Development</h3>
+        <p>Custom sections, features and fixes in HTML, CSS and front‑end code, for when a theme or plugin can't do what you need.</p>
+        <ul><li>Custom sections</li><li>Bug fixes</li><li>Front‑end</li></ul>
+      </article>
+
+      <article class="card s5 rv">
+        <div class="vis photo ai" style="height:300px">
+          <img class="bg" src="__IMG_p_ai__" alt="" aria-hidden="true" style="opacity:.7">
+          <div class="shade" style="background:linear-gradient(90deg,rgba(15,15,14,.15),rgba(15,15,14,.55))"></div>
+          <svg viewBox="0 0 900 200" preserveAspectRatio="xMidYMid meet">
+            <path class="w" d="M180 100 H300"/><path class="w" d="M440 100 C490 100 490 50 560 50"/><path class="w" d="M440 100 C490 100 490 150 560 150"/><path class="w" d="M700 50 C740 50 740 100 760 100"/><path class="w" d="M700 150 C740 150 740 100 760 100"/>
+            <path class="w2" d="M180 100 H300"/><path class="w2" d="M440 100 C490 100 490 50 560 50" style="animation-delay:.6s"/><path class="w2" d="M440 100 C490 100 490 150 560 150" style="animation-delay:.6s"/><path class="w2" d="M700 50 C740 50 740 100 760 100" style="animation-delay:1.2s"/><path class="w2" d="M700 150 C740 150 740 100 760 100" style="animation-delay:1.2s"/>
+            <g class="n"><rect x="40" y="70" width="140" height="60" rx="12"/><text x="60" y="96" class="sub">TRIGGER</text><text x="60" y="114">New order / lead</text></g>
+            <g class="n"><rect x="300" y="70" width="140" height="60" rx="12" style="stroke:#E4572E"/><text x="320" y="96" class="sub">AI STEP</text><text x="320" y="114">Read &amp; decide</text></g>
+            <g class="n"><rect x="560" y="22" width="140" height="56" rx="12"/><text x="580" y="46" class="sub">ACTION</text><text x="580" y="64">Reply to customer</text></g>
+            <g class="n"><rect x="560" y="122" width="140" height="56" rx="12"/><text x="580" y="146" class="sub">ACTION</text><text x="580" y="164">Update sheet / CRM</text></g>
+            <g class="n"><rect x="760" y="76" width="110" height="48" rx="24" style="fill:#E4572E;stroke:none"/><text x="790" y="105" style="fill:#0F0F0E">Done ✓</text></g>
+          </svg>
+        </div>
+        <span class="num mono">05</span>
+        <h3>AI Automations</h3>
+        <p>Workflows that handle repetitive work for you: replying to enquiries, sorting orders, moving data between your apps, and alerting your team when something needs a human.</p>
+        <ul><li>Workflow automation</li><li>AI assistants</li><li>App integrations</li><li>Time saved every week</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- WORK -->
+<section id="work" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="idx mono">02 — Selected work</div><h2 class="rv">Stores I've <em class="serif">built</em></h2></div>
+      <p class="rv d1">Real Shopify stores for real brands in the US and UK. Each one is live, so you can click through and try it yourself.</p>
+    </div>
+
+    <div class="work-feature">
+      <div class="shots rv">
+        <span class="latest">Latest project</span>
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>theabayacompany.london</span></div><div class="viewport"><img src="__IMG_tac__" alt="The Abaya Company homepage" loading="lazy"></div></div>
+        <div class="phone"><img src="__IMG_tac_m__" alt="The Abaya Company on mobile" loading="lazy"></div>
+      </div>
+      <div class="work-info rv d1">
+        <span class="mono">UK · Modest fashion</span>
+        <div class="tags"><span>Shopify</span><span>Prestige theme</span><span>Store redesign</span></div>
+        <h3>The Abaya Company</h3>
+        <ul><li>Store redesign for a London abaya and modest‑wear brand</li><li>Built on the premium Prestige theme</li><li>Collection banners and "New in" product tabs on the homepage</li><li>Clean, elegant layout on desktop and mobile</li></ul>
+        <a class="visit" href="https://theabayacompany.london" target="_blank" rel="noopener">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+      </div>
+    </div>
+    <div class="work-feature">
+      <div class="shots rv">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>dsnutsandboltsautomotive.com</span></div><div class="viewport"><img src="__IMG_dnb__" alt="D's Nuts &amp; Bolts Automotive homepage" loading="lazy"></div></div>
+        <div class="phone"><img src="__IMG_dnb_m__" alt="D's Nuts &amp; Bolts Automotive on mobile" loading="lazy"></div>
+      </div>
+      <div class="work-info rv d1">
+        <span class="mono">USA · Full redesign</span>
+        <div class="tags"><span>Shopify</span><span>Redesign</span><span>Custom products</span></div>
+        <h3>D's Nuts &amp; Bolts Automotive</h3>
+        <ul><li>Complete store redesign on a fresh theme</li><li>Merch shop with six customizable, engraved products</li><li>"Promote Your Business" and "Join the Next Tour" pages</li><li>Giveaway page, menus, collections and policies</li></ul>
+        <a class="visit" href="https://dsnutsandboltsautomotive.com" target="_blank" rel="noopener">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+      </div>
+    </div>
+    <div class="work-feature rev">
+      <div class="shots rv">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>shoptheblushambition.co.uk</span></div><div class="viewport"><img src="__IMG_blush__" alt="The Blush Ambition homepage" loading="lazy"></div></div>
+        <div class="phone"><img src="__IMG_blush_m__" alt="The Blush Ambition on mobile" loading="lazy"></div>
+      </div>
+      <div class="work-info rv d1">
+        <span class="mono">UK · Jewellery brand</span>
+        <div class="tags"><span>Shopify</span><span>Store redesign</span><span>Mobile‑first</span></div>
+        <h3>The Blush Ambition</h3>
+        <ul><li>Full homepage and store redesign for a jewellery brand</li><li>Collection cards, trust badges and featured product tabs</li><li>Step‑by‑step "Build Your Blush" charm section</li><li>Fully responsive on desktop and mobile</li></ul>
+        <a class="visit" href="https://shoptheblushambition.co.uk" target="_blank" rel="noopener">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+      </div>
+    </div>
+    <div class="work-grid">
+      <a class="wcard rv " href="https://littlemisslabel.com" target="_blank" rel="noopener">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>littlemisslabel.com</span></div><div class="viewport"><img src="__IMG_lml__" alt="Little Miss Label homepage" loading="lazy"></div></div>
+        <h4>Little Miss Label<small>UK</small></h4>
+        <p>Homepage redesign built around the seasonal Winter Wonderland collection.</p>
+        <span class="visit">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></span>
+      </a>
+      <a class="wcard rv d1" href="https://mimisdaughters.com" target="_blank" rel="noopener">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>mimisdaughters.com</span></div><div class="viewport"><img src="__IMG_mimi__" alt="Mimis Daughters homepage" loading="lazy"></div></div>
+        <h4>Mimis Daughters<small>UK</small></h4>
+        <p>Christmas store upgrade: homepage, gift sets, product pages and free‑shipping messaging.</p>
+        <span class="visit">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></span>
+      </a>
+      <a class="wcard rv d2" href="https://dancecardfull.com" target="_blank" rel="noopener">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>dancecardfull.com</span></div><div class="viewport"><img src="__IMG_dcf__" alt="Dance Card Full homepage" loading="lazy"></div></div>
+        <h4>Dance Card Full<small>USA</small></h4>
+        <p>New Apparel, Gear and Consumables collections, plus design and speed improvements.</p>
+        <span class="visit">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap about-grid">
+    <div>
+      <div class="idx mono">03 — About</div>
+      <p class="big-quote" id="quote">I'm a developer who talks to clients like a partner. Clear updates, calm revisions and work that's ready on launch day.</p>
+    </div>
+    <div class="about-copy rv">
+      <p>I'm Mubashir Ahmad, a developer based in Lahore with more than 3 years of experience building and customising online stores and websites. I started with Shopify and Klaviyo, and now cover WordPress, custom development and AI automation too.</p>
+      <p>I work directly with clients from the first brief to launch. I share clear change lists and screenshots, check every link and flow before it goes live, and keep things simple to understand.</p>
+      <div class="values">
+        <div><b>Clear communication</b><span>You always know what's done and what's next.</span></div>
+        <div><b>Tested before launch</b><span>Desktop, mobile, links and flows: all checked.</span></div>
+        <div><b>Calm revisions</b><span>Feedback is part of the process, not a problem.</span></div>
+        <div><b>On deadline</b><span>Built around your launch date.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="idx mono">04 — Process</div><h2 class="rv">How a project <em class="serif">runs</em></h2></div>
+      <p class="rv d1">A simple four‑step process, so you always know where your project stands.</p>
+    </div>
+    <div class="steps" id="steps">
+      <div class="rail"><i></i></div>
+      <div class="step"><div class="dot">01</div><h4>Discover</h4><p>We go through your goals, your brand and what the site or flow needs to do.</p></div>
+      <div class="step"><div class="dot">02</div><h4>Build</h4><p>I design and develop, and share progress with screenshots along the way.</p></div>
+      <div class="step"><div class="dot">03</div><h4>Test</h4><p>Every page, link, discount and email is checked on desktop and mobile.</p></div>
+      <div class="step"><div class="dot">04</div><h4>Launch</h4><p>We go live, and you get a clear list of everything that was done.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="idx mono">05 — Experience</div><h2 class="rv">Where I've <em class="serif">worked</em></h2></div>
+      <p class="rv d1">Hands‑on work on client stores, email marketing and launches.</p>
+    </div>
+    <div class="xp">
+      <div class="xp-row rv">
+        <div><span class="mono">Present</span></div>
+        <div><h4>Shopify Developer</h4><div class="co">Tech Avanza</div></div>
+        <ul>
+          <li>Customised Shopify storefronts: product pages, homepage sections, announcement bars and theme settings.</li>
+          <li>Set up discount codes, shipping rates, free‑shipping thresholds, stock levels and policy pages before launch.</li>
+          <li>Installed and configured apps such as product reviews and bundles.</li>
+          <li>Built Klaviyo flows with conditional splits and exit conditions, plus responsive HTML email templates.</li>
+        </ul>
+      </div>
+      <div class="xp-row rv">
+        <div><span class="mono">Ongoing</span></div>
+        <div><h4>Freelance Developer</h4><div class="co">Independent</div></div>
+        <ul>
+          <li>200+ projects for clients across Shopify, WordPress and custom development.</li>
+          <li>Custom coding, bug fixes, store setup and AI workflow automation.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="edu">
+      <div class="rv"><span class="mono">2026 · Grade A</span><b>Computer Operator / IT Assistant</b><span>Govt. Technical College (TEVTA)</span></div>
+      <div class="rv d1"><span class="mono">2026</span><b>Intermediate</b><span>BISE D.G. Khan</span></div>
+      <div class="rv d2"><span class="mono">2024</span><b>Matric</b><span>BISE D.G. Khan</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="idx mono">06 — Skills</div><h2 class="rv">The <em class="serif">toolkit</em></h2></div>
+      <p class="rv d1">The platforms and skills I use every day.</p>
+    </div>
+    <div class="skills">
+      <div class="skill rv"><span class="mono">E‑commerce</span><h5>Shopify</h5><div class="tags"><span>Theme customisation</span><span>Product & collection pages</span><span>Discounts</span><span>Shipping & checkout</span><span>App integration</span><span>Launch checklists</span></div></div>
+      <div class="skill rv d1"><span class="mono">Web</span><h5>Development</h5><div class="tags"><span>WordPress</span><span>HTML</span><span>CSS</span><span>Responsive design</span><span>Front‑end</span><span>Custom features</span></div></div>
+      <div class="skill rv d2"><span class="mono">Automation</span><h5>AI & Workflows</h5><div class="tags"><span>AI automations</span><span>Workflow design</span><span>App integrations</span><span>Data handling</span></div></div>
+      <div class="skill rv"><span class="mono">Retention</span><h5>Klaviyo & Email</h5><div class="tags"><span>Flows & segmentation</span><span>Conditional splits</span><span>HTML/CSS templates</span><span>Dynamic content</span><span>Coupon tags</span><span>Testing & QA</span></div></div>
+      <div class="skill rv d1"><span class="mono">Growth</span><h5>Marketing</h5><div class="tags"><span>Meta Ads</span><span>TikTok Ads</span></div></div>
+      <div class="skill rv d2"><span class="mono">People</span><h5>Soft skills</h5><div class="tags"><span>Client handling</span><span>Communication</span><span>Leadership</span><span>Urdu</span><span>English</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <div class="mono" style="margin-bottom:24px">07 — Contact</div>
+    <h2 class="rv">Let's build<br>something <em class="serif">great.</em></h2>
+    <p class="rv d1">Have a store to launch, a site to fix, or a task you want automated? Send me a message and I'll get back to you.</p>
+    <a href="mailto:ahmadmubashir450@gmail.com" class="btn btn-solid mag rv d2" style="font-size:16px;padding:18px 30px">Email me
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+    <div class="contact-row">
+      <div class="ccard rv">
+        <div class="top"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span class="mono">Reply within 24h</span></div>
+        <div><span class="label">Email</span><span class="val">ahmadmubashir450@gmail.com</span></div>
+        <div class="acts"><a class="pri" href="mailto:ahmadmubashir450@gmail.com">Send email</a><button class="copy" data-copy="ahmadmubashir450@gmail.com">Copy</button></div>
+      </div>
+      <div class="ccard rv d1">
+        <div class="top"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5c.5 2 2.5 4 4.5 4.5l1.2-1.2 2 .8-.5 1.9c-3.5.3-7.9-4.1-7.6-7.6L10.5 7l.8 2z"/></svg></span><span class="mono">Fastest</span></div>
+        <div><span class="label">WhatsApp / Phone</span><span class="val">+92 323 6510923</span></div>
+        <div class="acts"><a class="pri" href="https://wa.me/923236510923" target="_blank" rel="noopener">Chat on WhatsApp</a><button class="copy" data-copy="+923236510923">Copy</button></div>
+      </div>
+      <div class="ccard rv d2">
+        <div class="top"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span><span class="mono">GMT+5</span></div>
+        <div><span class="label">Based in</span><span class="val">Lahore, Pakistan</span></div>
+        <div class="live"><i></i>Working with clients in the US, UK &amp; Europe</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>© <span id="yr"></span> Mubashir Ahmad</span><span>Shopify · WordPress · Custom Development · AI Automation</span></div></footer>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // loader
+  const loader=document.getElementById('loader'), count=document.getElementById('count');
+  let n=0; const tick=()=>{ n+= Math.max(1,Math.round((100-n)/8)); if(n>=100){n=100;count.textContent=n;setTimeout(()=>{loader.classList.add('done');document.body.classList.add('loaded');startCounters();},250);return;} count.textContent=n; setTimeout(tick,28); };
+  if(reduce){loader.remove();document.body.classList.add('loaded');} else tick();
+
+  // nav + progress
+  const nav=document.getElementById('nav'), prog=document.getElementById('progress');
+  const onScroll=()=>{ const y=scrollY; nav.classList.toggle('scrolled',y>30);
+    prog.style.width=(y/(document.documentElement.scrollHeight-innerHeight)*100)+'%'; litWords(); };
+  addEventListener('scroll',onScroll,{passive:true});
+  const menuBtn=document.getElementById('menuBtn'), links=document.getElementById('navlinks');
+  menuBtn.addEventListener('click',()=>{links.classList.toggle('open');menuBtn.textContent=links.classList.contains('open')?'Close':'Menu';});
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');menuBtn.textContent='Menu';}));
+
+  // rotator
+  const words=[...document.querySelectorAll('#rotator b')]; let wi=0;
+  setInterval(()=>{ const cur=words[wi]; cur.classList.remove('on'); cur.classList.add('out'); setTimeout(()=>cur.classList.remove('out'),600);
+    wi=(wi+1)%words.length; words[wi].classList.add('on'); },2400);
+
+  // counters
+  function startCounters(){ document.querySelectorAll('.cnt').forEach(el=>{ const to=+el.dataset.to, t0=performance.now(), d=1600;
+    const step=t=>{ const p=Math.min(1,(t-t0)/d), e=1-Math.pow(1-p,3); el.textContent=Math.round(to*e); if(p<1) requestAnimationFrame(step); }; requestAnimationFrame(step); }); }
+  if(reduce) document.querySelectorAll('.cnt').forEach(el=>el.textContent=el.dataset.to);
+
+  // reveal
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.15});
+  document.querySelectorAll('.rv,#steps').forEach(el=>io.observe(el));
+
+  // marquee duplicate
+  const tr=document.getElementById('track'); tr.parentElement.appendChild(tr.cloneNode(true));
+
+  // word-by-word quote
+  const q=document.getElementById('quote'); q.innerHTML=q.textContent.split(' ').map(w=>'<span class="w">'+w+'</span>').join(' ');
+  const ws=[...q.querySelectorAll('.w')];
+  function litWords(){ const r=q.getBoundingClientRect(); const p=Math.min(1,Math.max(0,(innerHeight*.85-r.top)/(r.height+innerHeight*.35)));
+    const k=Math.round(p*ws.length); ws.forEach((w,i)=>w.classList.toggle('lit',i<k||reduce)); }
+  litWords();
+
+  // typing code
+  // shopify slideshow of real stores
+  const sl=[...document.querySelectorAll('#shopSlides img')], su=document.getElementById('shopUrl'); let si=0;
+  if(!reduce) setInterval(()=>{ sl[si].classList.remove('on'); si=(si+1)%sl.length; sl[si].classList.add('on'); su.textContent=sl[si].dataset.url; },3200);
+
+  const codeEl=document.getElementById('code');
+  const src=[
+    ['c','{% comment %} Free-shipping bar {% endcomment %}'],
+    ['','<div class="ship-bar">'],
+    ['k','  {% if cart.total_price >= 5000 %}'],
+    ['s','    You unlocked free shipping!'],
+    ['k','  {% else %}'],
+    ['s','    Add {{ 5000 | minus: cart.total_price | money }}'],
+    ['k','  {% endif %}'],
+    ['','</div>']
+  ];
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  let li=0, ci=0, done=[];
+  function type(){
+    if(li>=src.length){ setTimeout(()=>{li=0;ci=0;done=[];type();},2600); return; }
+    const [cls,txt]=src[li]; ci++;
+    const cur='<span class="'+cls+'">'+esc(txt.slice(0,ci))+'</span>';
+    codeEl.innerHTML=done.join('\n')+(done.length?'\n':'')+cur+'<span class="caret"></span>';
+    if(ci>=txt.length){ done.push('<span class="'+cls+'">'+esc(txt)+'</span>'); li++; ci=0; setTimeout(type,180); } else setTimeout(type,22);
+  }
+  if(reduce){ codeEl.innerHTML=src.map(([c,t])=>'<span class="'+c+'">'+esc(t)+'</span>').join('\n'); }
+  else { const co=new IntersectionObserver(es=>{ if(es[0].isIntersecting){ type(); co.disconnect(); } }); co.observe(codeEl); }
+
+  if(!reduce && matchMedia('(pointer:fine)').matches){
+    // magnetic buttons
+    document.querySelectorAll('.mag').forEach(b=>{
+      b.addEventListener('mousemove',e=>{ const r=b.getBoundingClientRect(); b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.25)+'px,'+((e.clientY-r.top-r.height/2)*.35)+'px)'; });
+      b.addEventListener('mouseleave',()=>b.style.transform='');
+    });
+    // portrait parallax
+    const ph=document.getElementById('photo');
+    addEventListener('mousemove',e=>{ const x=(e.clientX/innerWidth-.5), y=(e.clientY/innerHeight-.5); ph.style.transform='translate('+x*14+'px,'+y*14+'px)'; });
+    // card tilt
+    document.querySelectorAll('.card').forEach(c=>{
+      c.addEventListener('mousemove',e=>{ const r=c.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+        c.style.transform='perspective(1000px) rotateX('+(-y*3)+'deg) rotateY('+(x*3)+'deg)'; });
+      c.addEventListener('mouseleave',()=>c.style.transform='');
+    });
+  }
+
+  // copy
+  document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{
+    try{ await navigator.clipboard.writeText(b.dataset.copy); b.textContent='Copied ✓'; }catch(e){ b.textContent='Select text'; }
+    setTimeout(()=>b.textContent='Copy',1800);
+  }));
+})();
+</script>
+</body>
+</html>
