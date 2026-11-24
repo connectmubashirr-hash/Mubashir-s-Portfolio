@@ -112,6 +112,16 @@ h1 .line:nth-child(3)>span{transition-delay:.16s}
 .marquee span{font-family:var(--serif);font-size:38px;display:inline-flex;align-items:center;gap:56px;color:var(--bone-2)}
 .marquee span::after{content:"✳";font-size:20px;color:var(--accent)}
 @keyframes mq{to{transform:translateX(-100%)}}
+/* logo bar */
+.marquee.logos{padding:24px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee.logos .track{gap:48px;padding-right:48px;animation-duration:50s}
+.marquee.logos:hover .track{animation-play-state:paused}
+.marquee.logos span{font:600 17px var(--sans);gap:12px;color:var(--bone-2);transition:color .3s}
+.marquee.logos span::after{content:none}
+.marquee.logos img,.marquee.logos svg{width:26px;height:26px;flex-shrink:0;opacity:.75;transition:opacity .3s}
+.marquee.logos img{filter:invert(1)}
+.marquee.logos span:hover{color:var(--bone)}
+.marquee.logos span:hover img,.marquee.logos span:hover svg{opacity:1}
 
 /* sections */
 section{padding:96px 0;position:relative}
@@ -488,9 +498,9 @@ body.locked{overflow:hidden}
   <div class="scroll-cue"><span class="mono">Scroll</span><i></i></div>
 </header>
 
-<div class="marquee" aria-hidden="true">
+<div class="marquee logos" aria-hidden="true">
   <div class="track" id="track">
-    <span>Shopify</span><span>WordPress</span><span>Klaviyo</span><span>HTML &amp; CSS</span><span>Front‑end</span><span>AI Automation</span><span>Email Design</span><span>Meta Ads</span><span>TikTok Ads</span>
+    <span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/shopify.svg" alt="" width="26" height="26">Shopify</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/wordpress.svg" alt="" width="26" height="26">WordPress</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/woocommerce.svg" alt="" width="26" height="26">WooCommerce</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/wix.svg" alt="" width="26" height="26">Wix</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/elementor.svg" alt="" width="26" height="26">Elementor</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Klaviyo</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/html5.svg" alt="" width="26" height="26">HTML5</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/css3.svg" alt="" width="26" height="26">CSS3</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/javascript.svg" alt="" width="26" height="26">JavaScript</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/visualstudiocode.svg" alt="" width="26" height="26">VS&nbsp;Code</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/github.svg" alt="" width="26" height="26">GitHub</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/figma.svg" alt="" width="26" height="26">Figma</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/canva.svg" alt="" width="26" height="26">Canva</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/openai.svg" alt="" width="26" height="26">ChatGPT</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/zapier.svg" alt="" width="26" height="26">Zapier</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/make.svg" alt="" width="26" height="26">Make</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/n8n.svg" alt="" width="26" height="26">n8n</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/meta.svg" alt="" width="26" height="26">Meta&nbsp;Ads</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/tiktok.svg" alt="" width="26" height="26">TikTok&nbsp;Ads</span><span><img src="https://cdn.jsdelivr.net/npm/simple-icons@12.0.0/icons/googleanalytics.svg" alt="" width="26" height="26">Google&nbsp;Analytics</span>
   </div>
 </div>
 
