@@ -60,7 +60,10 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:7
 .btn-line:hover{border-color:var(--bone)}
 .btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}
 .btn:hover svg{transform:translate(3px,-3px)}
-.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--bone);border-radius:100px;padding:10px 16px;font:600 13px var(--sans)}
+.nav-r{display:flex;align-items:center;gap:10px}
+.menu-btn{display:inline-flex;align-items:center;gap:10px;background:none;border:1px solid var(--line);color:var(--bone);border-radius:100px;padding:12px 18px;font:600 13px var(--sans);cursor:pointer;transition:border-color .3s}
+.menu-btn:hover{border-color:var(--bone)}
+.burger{display:grid;gap:4px}.burger i{display:block;width:14px;height:1.5px;background:currentColor}.burger i:last-child{width:9px}
 
 /* hero */
 .hero{min-height:100vh;padding:130px 0 60px;position:relative;display:flex;align-items:center;overflow:hidden}
@@ -111,8 +114,8 @@ h1 .line:nth-child(3)>span{transition-delay:.16s}
 @keyframes mq{to{transform:translateX(-100%)}}
 
 /* sections */
-section{padding:130px 0;position:relative}
-.sec-head{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:end;margin-bottom:64px}
+section{padding:96px 0;position:relative}
+.sec-head{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:end;margin-bottom:44px}
 .sec-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.4vw,72px);line-height:1;letter-spacing:-.015em}
 .sec-head p{color:var(--bone-2);max-width:480px;justify-self:end}
 .idx{display:flex;gap:12px;align-items:center;margin-bottom:18px}
@@ -197,7 +200,7 @@ section{padding:130px 0;position:relative}
 @keyframes strip{to{transform:translateX(-50%)}}
 
 /* work */
-.work-feature{display:grid;grid-template-columns:1.6fr 1fr;gap:56px;align-items:center;margin-bottom:110px}
+.work-feature{display:grid;grid-template-columns:1.6fr 1fr;gap:56px;align-items:center;margin-bottom:72px}
 .work-feature.rev{grid-template-columns:1fr 1.6fr}
 .work-feature.rev .shots{order:2}
 .shots{position:relative;padding-bottom:40px}
@@ -232,8 +235,8 @@ section{padding:130px 0;position:relative}
 
 
 /* photo visuals */
-.vis.photo{height:240px;background:#000}
-.vis.photo.tall{height:300px}
+.vis.photo{height:190px;background:#000}
+.vis.photo.tall{height:230px}
 .vis .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;transform:scale(1.04);animation:kb 16s ease-in-out infinite alternate;transition:opacity .6s}
 .card:hover .vis .bg{opacity:.7}
 @keyframes kb{to{transform:scale(1.14) translate(-1.5%,-1%)}}
@@ -319,11 +322,11 @@ section{padding:130px 0;position:relative}
 .skill .tags span:hover{background:var(--accent);color:var(--ink)}
 
 /* cta / contact */
-.cta{text-align:center;padding:160px 0 120px;border-top:1px solid var(--line)}
+.cta{text-align:center;padding:110px 0 90px;border-top:1px solid var(--line)}
 .cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(56px,10vw,150px);line-height:.9;letter-spacing:-.025em}
 .cta h2 em{color:var(--accent)}
 .cta p{color:var(--bone-2);margin:26px auto 40px;max-width:520px;font-size:18px}
-.contact-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:80px;text-align:left}
+.contact-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px;text-align:left}
 .ccard{position:relative;background:var(--ink-2);border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:22px;min-height:190px;transition:border-color .4s,transform .5s var(--ease)}
 .ccard:hover{border-color:#4a4842;transform:translateY(-4px)}
 .ccard .top{display:flex;justify-content:space-between;align-items:center}
@@ -342,11 +345,52 @@ section{padding:130px 0;position:relative}
 footer{border-top:1px solid var(--line);padding:30px 0}
 footer .wrap{display:flex;justify-content:space-between;color:var(--mute);font-size:13px}
 
+/* compact home: "more work" bar + about links */
+.more-work{display:flex;align-items:center;gap:24px;padding:20px 24px;border:1px solid var(--line);border-radius:20px;background:var(--ink-2)}
+.more-work .thumbs{display:flex;flex-shrink:0}
+.more-work .thumbs img{width:68px;height:46px;object-fit:cover;object-position:top;border-radius:9px;border:2px solid var(--ink-2);margin-left:-16px}
+.more-work .thumbs img:first-child{margin-left:0}
+.mw-txt{flex:1;min-width:0}
+.mw-txt b{display:block;font-size:17px;font-weight:600}
+.mw-txt span{color:var(--mute);font-size:14px}
+.about-links{display:flex;flex-wrap:wrap;gap:14px 26px;margin-top:30px}
+
+/* menu + overlay pages */
+body.locked{overflow:hidden}
+.sheet{position:fixed;inset:0;z-index:120;background:var(--ink);overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transform:translateY(18px);transition:opacity .35s var(--ease),transform .5s var(--ease),visibility 0s linear .5s}
+.sheet.open{opacity:1;visibility:visible;transform:none;transition:opacity .35s var(--ease),transform .5s var(--ease),visibility 0s}
+.sheet-bar{position:sticky;top:0;z-index:5;background:rgba(15,15,14,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.sheet-bar .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.sheet section{padding:56px 0 88px}
+.work-grid.two{grid-template-columns:repeat(2,1fr);row-gap:48px}
+.menu-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;padding:56px 0 48px}
+.menu-grid .mono{display:block;color:var(--mute);margin-bottom:18px}
+.menu-main{display:flex;flex-direction:column}
+.menu-main a{font-family:var(--serif);font-size:clamp(44px,6vw,80px);line-height:1.1;display:flex;align-items:baseline;gap:18px;transition:color .3s,transform .4s var(--ease)}
+.menu-main a i{font:400 12px var(--mono);font-style:normal;color:var(--mute)}
+.menu-main a:hover{color:var(--accent);transform:translateX(8px)}
+.menu-more{display:grid;gap:12px;align-content:start}
+.mcard{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:20px 22px;border:1px solid var(--line);border-radius:18px;background:var(--ink-2);transition:border-color .3s,transform .4s var(--ease)}
+.mcard b{font-size:18px;font-weight:600}
+.mcard span{grid-column:1;color:var(--mute);font-size:14px}
+.mcard svg{grid-row:1/3;grid-column:2;align-self:center;width:18px;height:18px;color:var(--accent);transition:transform .3s var(--ease)}
+.mcard:hover{border-color:var(--accent);transform:translateY(-2px)}
+.mcard:hover svg{transform:translate(3px,-3px)}
+.menu-foot{display:flex;flex-wrap:wrap;gap:10px 32px;padding:24px 0 40px;border-top:1px solid var(--line);color:var(--bone-2);font-size:14px}
+.menu-foot a:hover{color:var(--accent)}
+.sheet.open .menu-main a,.sheet.open .mcard{animation:menuIn .6s var(--ease) both}
+.sheet.open .menu-main a:nth-of-type(2),.sheet.open .mcard:nth-of-type(2){animation-delay:.05s}
+.sheet.open .menu-main a:nth-of-type(3),.sheet.open .mcard:nth-of-type(3){animation-delay:.1s}
+.sheet.open .menu-main a:nth-of-type(4),.sheet.open .mcard:nth-of-type(4){animation-delay:.15s}
+@keyframes menuIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
 /* responsive */
 @media (max-width:980px){
-  .navlinks,.nav-cta{display:none}.menu-btn{display:block}
-  .navlinks.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;gap:0;background:var(--ink);border-bottom:1px solid var(--line)}
-  .navlinks.open a{padding:16px 24px;border-top:1px solid var(--line)}
+  .navlinks,.nav-cta{display:none}
+  .menu-grid{grid-template-columns:1fr;gap:40px;padding:36px 0 32px}
+  .work-grid.two{grid-template-columns:1fr}
+  .more-work{flex-wrap:wrap;gap:16px}
+  .sheet section{padding:40px 0 64px}
   .hero-grid,.about-grid,.sec-head{grid-template-columns:1fr}
   .sec-head p{justify-self:start}
   .portrait{justify-self:center;max-width:380px;margin-top:20px}
@@ -355,7 +399,7 @@ footer .wrap{display:flex;justify-content:space-between;color:var(--mute);font-s
   .steps{grid-template-columns:1fr 1fr;row-gap:40px}.steps .rail{display:none}
   .xp-row{grid-template-columns:1fr;gap:16px}
   .skills,.edu,.contact-row{grid-template-columns:1fr}
-  .work-feature,.work-feature.rev{grid-template-columns:1fr;gap:34px;margin-bottom:80px}
+  .work-feature,.work-feature.rev{grid-template-columns:1fr;gap:34px;margin-bottom:56px}
   .work-feature.rev .shots{order:0}
   .phone,.work-feature.rev .phone{right:-6px;left:auto;width:30%}
   .work-grid{grid-template-columns:1fr;gap:48px}
@@ -364,7 +408,7 @@ footer .wrap{display:flex;justify-content:space-between;color:var(--mute);font-s
   .pop.p1{left:3%}
   .term .code{font-size:10px}
   .stats{gap:28px;flex-wrap:wrap}
-  section{padding:96px 0}
+  section{padding:72px 0}
   .scroll-cue{display:none}
   .ai{overflow-x:auto}.ai svg{min-width:680px}
 }
@@ -373,6 +417,8 @@ footer .wrap{display:flex;justify-content:space-between;color:var(--mute);font-s
   .steps{grid-template-columns:1fr}
   .values{grid-template-columns:1fr}
   footer .wrap{flex-direction:column;gap:6px}
+  .sheet-bar .logo{font-size:0;gap:0}
+  .sheet-bar .menu-btn{padding:10px 14px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -393,13 +439,13 @@ footer .wrap{display:flex;justify-content:space-between;color:var(--mute);font-s
       <a href="#services">Services</a>
       <a href="#work">Work</a>
       <a href="#about">About</a>
-      <a href="#process">Process</a>
-      <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
     </div>
-    <a href="#contact" class="btn btn-solid nav-cta mag">Let's talk
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu">Menu</button>
+    <div class="nav-r">
+      <a href="#contact" class="btn btn-solid nav-cta mag">Let's talk
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+      <button class="menu-btn" data-open="menu" aria-haspopup="dialog" aria-controls="sheet-menu"><span class="burger" aria-hidden="true"><i></i><i></i></span>Menu</button>
+    </div>
   </div>
 </nav>
 
@@ -447,10 +493,6 @@ footer .wrap{display:flex;justify-content:space-between;color:var(--mute);font-s
   </div>
 </div>
 
-
-<div class="strip" aria-label="Recent client stores">
-  <div class="row"><figure><img src="__IMG_tac__" alt="The Abaya Company store" loading="lazy"><figcaption><span>The Abaya Company</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_dnb__" alt="DNB Automotive store" loading="lazy"><figcaption><span>DNB Automotive</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_blush__" alt="The Blush Ambition store" loading="lazy"><figcaption><span>The Blush Ambition</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_lml__" alt="Little Miss Label store" loading="lazy"><figcaption><span>Little Miss Label</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_mimi__" alt="Mimis Daughters store" loading="lazy"><figcaption><span>Mimis Daughters</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_dcf__" alt="Dance Card Full store" loading="lazy"><figcaption><span>Dance Card Full</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_tac__" aria-hidden="true" alt="The Abaya Company store" loading="lazy"><figcaption><span>The Abaya Company</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_dnb__" aria-hidden="true" alt="DNB Automotive store" loading="lazy"><figcaption><span>DNB Automotive</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_blush__" aria-hidden="true" alt="The Blush Ambition store" loading="lazy"><figcaption><span>The Blush Ambition</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_lml__" aria-hidden="true" alt="Little Miss Label store" loading="lazy"><figcaption><span>Little Miss Label</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_mimi__" aria-hidden="true" alt="Mimis Daughters store" loading="lazy"><figcaption><span>Mimis Daughters</span><span class="mono">Shopify</span></figcaption></figure><figure><img src="__IMG_dcf__" aria-hidden="true" alt="Dance Card Full store" loading="lazy"><figcaption><span>Dance Card Full</span><span class="mono">Shopify</span></figcaption></figure></div>
-</div>
 
 <!-- SERVICES -->
 <section id="services">
@@ -526,7 +568,7 @@ footer .wrap{display:flex;justify-content:space-between;color:var(--mute);font-s
       </article>
 
       <article class="card s5 rv">
-        <div class="vis photo ai" style="height:300px">
+        <div class="vis photo ai" style="height:220px">
           <img class="bg" src="__IMG_p_ai__" alt="" aria-hidden="true" style="opacity:.7">
           <div class="shade" style="background:linear-gradient(90deg,rgba(15,15,14,.15),rgba(15,15,14,.55))"></div>
           <svg viewBox="0 0 900 200" preserveAspectRatio="xMidYMid meet">
@@ -584,38 +626,10 @@ footer .wrap{display:flex;justify-content:space-between;color:var(--mute);font-s
         <a class="visit" href="https://dsnutsandboltsautomotive.com" target="_blank" rel="noopener">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
       </div>
     </div>
-    <div class="work-feature rev">
-      <div class="shots rv">
-        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>shoptheblushambition.co.uk</span></div><div class="viewport"><img src="__IMG_blush__" alt="The Blush Ambition homepage" loading="lazy"></div></div>
-        <div class="phone"><img src="__IMG_blush_m__" alt="The Blush Ambition on mobile" loading="lazy"></div>
-      </div>
-      <div class="work-info rv d1">
-        <span class="mono">UK · Jewellery brand</span>
-        <div class="tags"><span>Shopify</span><span>Store redesign</span><span>Mobile‑first</span></div>
-        <h3>The Blush Ambition</h3>
-        <ul><li>Full homepage and store redesign for a jewellery brand</li><li>Collection cards, trust badges and featured product tabs</li><li>Step‑by‑step "Build Your Blush" charm section</li><li>Fully responsive on desktop and mobile</li></ul>
-        <a class="visit" href="https://shoptheblushambition.co.uk" target="_blank" rel="noopener">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
-      </div>
-    </div>
-    <div class="work-grid">
-      <a class="wcard rv " href="https://littlemisslabel.com" target="_blank" rel="noopener">
-        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>littlemisslabel.com</span></div><div class="viewport"><img src="__IMG_lml__" alt="Little Miss Label homepage" loading="lazy"></div></div>
-        <h4>Little Miss Label<small>UK</small></h4>
-        <p>Homepage redesign built around the seasonal Winter Wonderland collection.</p>
-        <span class="visit">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></span>
-      </a>
-      <a class="wcard rv d1" href="https://mimisdaughters.com" target="_blank" rel="noopener">
-        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>mimisdaughters.com</span></div><div class="viewport"><img src="__IMG_mimi__" alt="Mimis Daughters homepage" loading="lazy"></div></div>
-        <h4>Mimis Daughters<small>UK</small></h4>
-        <p>Christmas store upgrade: homepage, gift sets, product pages and free‑shipping messaging.</p>
-        <span class="visit">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></span>
-      </a>
-      <a class="wcard rv d2" href="https://dancecardfull.com" target="_blank" rel="noopener">
-        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>dancecardfull.com</span></div><div class="viewport"><img src="__IMG_dcf__" alt="Dance Card Full homepage" loading="lazy"></div></div>
-        <h4>Dance Card Full<small>USA</small></h4>
-        <p>New Apparel, Gear and Consumables collections, plus design and speed improvements.</p>
-        <span class="visit">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></span>
-      </a>
+    <div class="more-work rv">
+      <div class="thumbs" aria-hidden="true"><img src="__IMG_blush__" alt=""><img src="__IMG_lml__" alt=""><img src="__IMG_mimi__" alt=""><img src="__IMG_dcf__" alt=""></div>
+      <div class="mw-txt"><b>+4 more live stores</b><span>The Blush Ambition, Little Miss Label, Mimis Daughters and Dance Card Full</span></div>
+      <a href="#projects" data-open="projects" class="btn btn-line mag">View all projects <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
     </div>
   </div>
 </section>
@@ -636,78 +650,11 @@ footer .wrap{display:flex;justify-content:space-between;color:var(--mute);font-s
         <div><b>Calm revisions</b><span>Feedback is part of the process, not a problem.</span></div>
         <div><b>On deadline</b><span>Built around your launch date.</span></div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section id="process">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><div class="idx mono">04 — Process</div><h2 class="rv">How a project <em class="serif">runs</em></h2></div>
-      <p class="rv d1">A simple four‑step process, so you always know where your project stands.</p>
-    </div>
-    <div class="steps" id="steps">
-      <div class="rail"><i></i></div>
-      <div class="step"><div class="dot">01</div><h4>Discover</h4><p>We go through your goals, your brand and what the site or flow needs to do.</p></div>
-      <div class="step"><div class="dot">02</div><h4>Build</h4><p>I design and develop, and share progress with screenshots along the way.</p></div>
-      <div class="step"><div class="dot">03</div><h4>Test</h4><p>Every page, link, discount and email is checked on desktop and mobile.</p></div>
-      <div class="step"><div class="dot">04</div><h4>Launch</h4><p>We go live, and you get a clear list of everything that was done.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience" style="padding-top:40px">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><div class="idx mono">05 — Experience</div><h2 class="rv">Where I've <em class="serif">worked</em></h2></div>
-      <p class="rv d1">Hands‑on work on client stores, email marketing and launches.</p>
-    </div>
-    <div class="xp">
-      <div class="xp-row rv">
-        <div><span class="mono">Present</span></div>
-        <div><h4>Shopify Developer</h4><div class="co">Tech Avanza</div></div>
-        <ul>
-          <li>Contributed to <b>$1M+ in revenue</b> generated across Tech Avanza client stores.</li>
-          <li>Customised Shopify storefronts: product pages, homepage sections, announcement bars and theme settings.</li>
-          <li>Set up discount codes, shipping rates, free‑shipping thresholds, stock levels and policy pages before launch.</li>
-          <li>Installed and configured apps such as product reviews and bundles.</li>
-          <li>Built Klaviyo flows with conditional splits and exit conditions, plus responsive HTML email templates.</li>
-        </ul>
+      <div class="about-links">
+        <a class="visit" href="#experience" data-open="experience">My experience <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+        <a class="visit" href="#process" data-open="process">How I work <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+        <a class="visit" href="#skills" data-open="skills">Skills <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
       </div>
-      <div class="xp-row rv">
-        <div><span class="mono">Ongoing</span></div>
-        <div><h4>Freelance Developer</h4><div class="co">Independent</div></div>
-        <ul>
-          <li>Generating <b>$10K+ in monthly revenue</b> from freelance client work.</li>
-          <li>200+ projects for clients across Shopify, WordPress and custom development.</li>
-          <li>Custom coding, bug fixes, store setup and AI workflow automation.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="edu">
-      <div class="rv"><span class="mono">2026 · Grade A</span><b>Computer Operator / IT Assistant</b><span>Govt. Technical College (TEVTA)</span></div>
-      <div class="rv d1"><span class="mono">2026</span><b>Intermediate</b><span>BISE D.G. Khan</span></div>
-      <div class="rv d2"><span class="mono">2024</span><b>Matric</b><span>BISE D.G. Khan</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" style="padding-top:40px">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><div class="idx mono">06 — Skills</div><h2 class="rv">The <em class="serif">toolkit</em></h2></div>
-      <p class="rv d1">The platforms and skills I use every day.</p>
-    </div>
-    <div class="skills">
-      <div class="skill rv"><span class="mono">E‑commerce</span><h5>Shopify</h5><div class="tags"><span>Theme customisation</span><span>Product & collection pages</span><span>Discounts</span><span>Shipping & checkout</span><span>App integration</span><span>Launch checklists</span></div></div>
-      <div class="skill rv d1"><span class="mono">Web</span><h5>Development</h5><div class="tags"><span>WordPress</span><span>HTML</span><span>CSS</span><span>Responsive design</span><span>Front‑end</span><span>Custom features</span></div></div>
-      <div class="skill rv d2"><span class="mono">Automation</span><h5>AI & Workflows</h5><div class="tags"><span>AI automations</span><span>Workflow design</span><span>App integrations</span><span>Data handling</span></div></div>
-      <div class="skill rv"><span class="mono">Retention</span><h5>Klaviyo & Email</h5><div class="tags"><span>Flows & segmentation</span><span>Conditional splits</span><span>HTML/CSS templates</span><span>Dynamic content</span><span>Coupon tags</span><span>Testing & QA</span></div></div>
-      <div class="skill rv d1"><span class="mono">Growth</span><h5>Marketing</h5><div class="tags"><span>Meta Ads</span><span>TikTok Ads</span></div></div>
-      <div class="skill rv d2"><span class="mono">People</span><h5>Soft skills</h5><div class="tags"><span>Client handling</span><span>Communication</span><span>Leadership</span><span>Urdu</span><span>English</span></div></div>
     </div>
   </div>
 </section>
@@ -742,6 +689,165 @@ footer .wrap{display:flex;justify-content:space-between;color:var(--mute);font-s
 
 <footer><div class="wrap"><span>© <span id="yr"></span> Mubashir Ahmad</span><span>Shopify · WordPress · Custom Development · AI Automation</span></div></footer>
 
+<!-- MENU + OVERLAY PAGES -->
+<div class="sheet menu" id="sheet-menu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="sheet-bar"><div class="wrap">
+    <a href="#top" class="logo" data-close><span class="mark">M</span>Mubashir Ahmad</a>
+    <div class="nav-r"><button class="menu-btn sheet-x" data-close aria-label="Close">Close <span aria-hidden="true">&#x2715;</span></button></div>
+  </div></div>
+  <div class="wrap menu-grid">
+    <div class="menu-main" role="navigation" aria-label="Page sections">
+      <span class="mono">On this page</span>
+      <a href="#services" data-close><i>01</i>Services</a>
+      <a href="#work" data-close><i>02</i>Work</a>
+      <a href="#about" data-close><i>03</i>About</a>
+      <a href="#contact" data-close><i>04</i>Contact</a>
+    </div>
+    <div class="menu-more">
+      <span class="mono">Explore more</span>
+      <a class="mcard" href="#projects" data-open="projects"><b>All projects</b><span>4 more live Shopify stores in the UK &amp; US</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+      <a class="mcard" href="#experience" data-open="experience"><b>Experience</b><span>Tech Avanza ($1M+ revenue) and freelance ($10K+/month)</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+      <a class="mcard" href="#process" data-open="process"><b>Process</b><span>Discover, build, test, launch</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+      <a class="mcard" href="#skills" data-open="skills"><b>Skills</b><span>Shopify, Klaviyo, WordPress, AI and more</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></a>
+    </div>
+  </div>
+  <div class="wrap menu-foot">
+    <a href="mailto:ahmadmubashir450@gmail.com">ahmadmubashir450@gmail.com</a>
+    <a href="https://wa.me/923236510923" target="_blank" rel="noopener">WhatsApp +92 323 6510923</a>
+    <span>Lahore, Pakistan · GMT+5</span>
+  </div>
+</div>
+<div class="sheet" id="sheet-projects" role="dialog" aria-modal="true" aria-label="All projects">
+  <div class="sheet-bar"><div class="wrap">
+    <a href="#top" class="logo" data-close><span class="mark">M</span>Mubashir Ahmad</a>
+    <div class="nav-r"><button class="menu-btn" data-open="menu"><span class="burger" aria-hidden="true"><i></i><i></i></span>Menu</button><button class="menu-btn sheet-x" data-close aria-label="Close">Close <span aria-hidden="true">&#x2715;</span></button></div>
+  </div></div>
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="idx mono">All projects</div><h2 class="rv">More stores I've <em class="serif">built</em></h2></div>
+      <p class="rv d1">Four more live Shopify stores for brands in the UK and US. Click any card to open the store.</p>
+    </div>
+    <div class="work-grid two">
+      <a class="wcard rv" href="https://shoptheblushambition.co.uk" target="_blank" rel="noopener">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>shoptheblushambition.co.uk</span></div><div class="viewport"><img src="__IMG_blush__" alt="The Blush Ambition homepage" loading="lazy"></div></div>
+        <h4>The Blush Ambition<small>UK</small></h4>
+        <p>Full homepage and store redesign for a jewellery brand, with a step&#8209;by&#8209;step "Build Your Blush" charm section.</p>
+        <span class="visit">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></span>
+      </a>
+      <a class="wcard rv" href="https://littlemisslabel.com" target="_blank" rel="noopener">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>littlemisslabel.com</span></div><div class="viewport"><img src="__IMG_lml__" alt="Little Miss Label homepage" loading="lazy"></div></div>
+        <h4>Little Miss Label<small>UK</small></h4>
+        <p>Homepage redesign built around the seasonal Winter Wonderland collection.</p>
+        <span class="visit">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></span>
+      </a>
+
+      <a class="wcard rv" href="https://mimisdaughters.com" target="_blank" rel="noopener">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>mimisdaughters.com</span></div><div class="viewport"><img src="__IMG_mimi__" alt="Mimis Daughters homepage" loading="lazy"></div></div>
+        <h4>Mimis Daughters<small>UK</small></h4>
+        <p>Christmas store upgrade: homepage, gift sets, product pages and free‑shipping messaging.</p>
+        <span class="visit">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></span>
+      </a>
+
+      <a class="wcard rv" href="https://dancecardfull.com" target="_blank" rel="noopener">
+        <div class="frame"><div class="bar"><i></i><i></i><i></i><span>dancecardfull.com</span></div><div class="viewport"><img src="__IMG_dcf__" alt="Dance Card Full homepage" loading="lazy"></div></div>
+        <h4>Dance Card Full<small>USA</small></h4>
+        <p>New Apparel, Gear and Consumables collections, plus design and speed improvements.</p>
+        <span class="visit">Visit live store <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="sheet" id="sheet-experience" role="dialog" aria-modal="true" aria-label="Experience">
+  <div class="sheet-bar"><div class="wrap">
+    <a href="#top" class="logo" data-close><span class="mark">M</span>Mubashir Ahmad</a>
+    <div class="nav-r"><button class="menu-btn" data-open="menu"><span class="burger" aria-hidden="true"><i></i><i></i></span>Menu</button><button class="menu-btn sheet-x" data-close aria-label="Close">Close <span aria-hidden="true">&#x2715;</span></button></div>
+  </div></div>
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="idx mono">Experience</div><h2 class="rv">Where I've <em class="serif">worked</em></h2></div>
+      <p class="rv d1">Hands‑on work on client stores, email marketing and launches.</p>
+    </div>
+    <div class="xp">
+      <div class="xp-row rv">
+        <div><span class="mono">Present</span></div>
+        <div><h4>Shopify Developer</h4><div class="co">Tech Avanza</div></div>
+        <ul>
+          <li>Contributed to <b>$1M+ in revenue</b> generated across Tech Avanza client stores.</li>
+          <li>Customised Shopify storefronts: product pages, homepage sections, announcement bars and theme settings.</li>
+          <li>Set up discount codes, shipping rates, free‑shipping thresholds, stock levels and policy pages before launch.</li>
+          <li>Installed and configured apps such as product reviews and bundles.</li>
+          <li>Built Klaviyo flows with conditional splits and exit conditions, plus responsive HTML email templates.</li>
+        </ul>
+      </div>
+      <div class="xp-row rv">
+        <div><span class="mono">Ongoing</span></div>
+        <div><h4>Freelance Developer</h4><div class="co">Independent</div></div>
+        <ul>
+          <li>Generating <b>$10K+ in monthly revenue</b> from freelance client work.</li>
+          <li>200+ projects for clients across Shopify, WordPress and custom development.</li>
+          <li>Custom coding, bug fixes, store setup and AI workflow automation.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="edu">
+      <div class="rv"><span class="mono">2026 · Grade A</span><b>Computer Operator / IT Assistant</b><span>Govt. Technical College (TEVTA)</span></div>
+      <div class="rv d1"><span class="mono">2026</span><b>Intermediate</b><span>BISE D.G. Khan</span></div>
+      <div class="rv d2"><span class="mono">2024</span><b>Matric</b><span>BISE D.G. Khan</span></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="sheet" id="sheet-process" role="dialog" aria-modal="true" aria-label="Process">
+  <div class="sheet-bar"><div class="wrap">
+    <a href="#top" class="logo" data-close><span class="mark">M</span>Mubashir Ahmad</a>
+    <div class="nav-r"><button class="menu-btn" data-open="menu"><span class="burger" aria-hidden="true"><i></i><i></i></span>Menu</button><button class="menu-btn sheet-x" data-close aria-label="Close">Close <span aria-hidden="true">&#x2715;</span></button></div>
+  </div></div>
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="idx mono">Process</div><h2 class="rv">How a project <em class="serif">runs</em></h2></div>
+      <p class="rv d1">A simple four‑step process, so you always know where your project stands.</p>
+    </div>
+    <div class="steps" id="steps">
+      <div class="rail"><i></i></div>
+      <div class="step"><div class="dot">01</div><h4>Discover</h4><p>We go through your goals, your brand and what the site or flow needs to do.</p></div>
+      <div class="step"><div class="dot">02</div><h4>Build</h4><p>I design and develop, and share progress with screenshots along the way.</p></div>
+      <div class="step"><div class="dot">03</div><h4>Test</h4><p>Every page, link, discount and email is checked on desktop and mobile.</p></div>
+      <div class="step"><div class="dot">04</div><h4>Launch</h4><p>We go live, and you get a clear list of everything that was done.</p></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="sheet" id="sheet-skills" role="dialog" aria-modal="true" aria-label="Skills">
+  <div class="sheet-bar"><div class="wrap">
+    <a href="#top" class="logo" data-close><span class="mark">M</span>Mubashir Ahmad</a>
+    <div class="nav-r"><button class="menu-btn" data-open="menu"><span class="burger" aria-hidden="true"><i></i><i></i></span>Menu</button><button class="menu-btn sheet-x" data-close aria-label="Close">Close <span aria-hidden="true">&#x2715;</span></button></div>
+  </div></div>
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="idx mono">Skills</div><h2 class="rv">The <em class="serif">toolkit</em></h2></div>
+      <p class="rv d1">The platforms and skills I use every day.</p>
+    </div>
+    <div class="skills">
+      <div class="skill rv"><span class="mono">E‑commerce</span><h5>Shopify</h5><div class="tags"><span>Theme customisation</span><span>Product & collection pages</span><span>Discounts</span><span>Shipping & checkout</span><span>App integration</span><span>Launch checklists</span></div></div>
+      <div class="skill rv d1"><span class="mono">Web</span><h5>Development</h5><div class="tags"><span>WordPress</span><span>HTML</span><span>CSS</span><span>Responsive design</span><span>Front‑end</span><span>Custom features</span></div></div>
+      <div class="skill rv d2"><span class="mono">Automation</span><h5>AI & Workflows</h5><div class="tags"><span>AI automations</span><span>Workflow design</span><span>App integrations</span><span>Data handling</span></div></div>
+      <div class="skill rv"><span class="mono">Retention</span><h5>Klaviyo & Email</h5><div class="tags"><span>Flows & segmentation</span><span>Conditional splits</span><span>HTML/CSS templates</span><span>Dynamic content</span><span>Coupon tags</span><span>Testing & QA</span></div></div>
+      <div class="skill rv d1"><span class="mono">Growth</span><h5>Marketing</h5><div class="tags"><span>Meta Ads</span><span>TikTok Ads</span></div></div>
+      <div class="skill rv d2"><span class="mono">People</span><h5>Soft skills</h5><div class="tags"><span>Client handling</span><span>Communication</span><span>Leadership</span><span>Urdu</span><span>English</span></div></div>
+    </div>
+  </div>
+</section>
+</div>
+
+
 <script>
 (function(){
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -757,9 +863,21 @@ footer .wrap{display:flex;justify-content:space-between;color:var(--mute);font-s
   const onScroll=()=>{ const y=scrollY; nav.classList.toggle('scrolled',y>30);
     prog.style.width=(y/(document.documentElement.scrollHeight-innerHeight)*100)+'%'; litWords(); };
   addEventListener('scroll',onScroll,{passive:true});
-  const menuBtn=document.getElementById('menuBtn'), links=document.getElementById('navlinks');
-  menuBtn.addEventListener('click',()=>{links.classList.toggle('open');menuBtn.textContent=links.classList.contains('open')?'Close':'Menu';});
-  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');menuBtn.textContent='Menu';}));
+  // menu + overlay pages (projects, experience, process, skills)
+  const sheets={}; document.querySelectorAll('.sheet').forEach(s=>sheets[s.id.slice(6)]=s);
+  let lastFocus=null;
+  function openSheet(name){ const s=sheets[name]; if(!s) return;
+    if(!document.body.classList.contains('locked')) lastFocus=document.activeElement;
+    Object.values(sheets).forEach(o=>{ if(o!==s) o.classList.remove('open'); });
+    s.classList.add('open'); s.scrollTop=0; document.body.classList.add('locked');
+    setTimeout(()=>s.querySelectorAll('.rv,#steps').forEach(el=>el.classList.add('in')),80);
+    const x=s.querySelector('.sheet-x'); if(x) x.focus({preventScroll:true}); }
+  function closeSheets(){ Object.values(sheets).forEach(o=>o.classList.remove('open')); document.body.classList.remove('locked'); }
+  document.addEventListener('click',e=>{
+    const o=e.target.closest('[data-open]'); if(o){ e.preventDefault(); openSheet(o.dataset.open); return; }
+    const c=e.target.closest('[data-close]'); if(c){ closeSheets(); if(!c.getAttribute('href')){ e.preventDefault(); if(lastFocus) lastFocus.focus({preventScroll:true}); } } });
+  addEventListener('keydown',e=>{ if(e.key==='Escape' && document.body.classList.contains('locked')){ closeSheets(); if(lastFocus) lastFocus.focus({preventScroll:true}); } });
+  const h0=location.hash.slice(1); if(h0!=='menu' && sheets[h0]) openSheet(h0);
 
   // rotator
   const words=[...document.querySelectorAll('#rotator b')]; let wi=0;
@@ -773,7 +891,7 @@ footer .wrap{display:flex;justify-content:space-between;color:var(--mute);font-s
 
   // reveal
   const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.15});
-  document.querySelectorAll('.rv,#steps').forEach(el=>io.observe(el));
+  document.querySelectorAll('.rv,#steps').forEach(el=>{ if(!el.closest('.sheet')) io.observe(el); });
 
   // marquee duplicate
   const tr=document.getElementById('track'); tr.parentElement.appendChild(tr.cloneNode(true));
